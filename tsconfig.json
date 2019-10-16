@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "outDir": "./built",
+    // "allowJs": true,
+    // "resolveJsonModule": true,
+    "target": "es6",
+    "lib": ["es7", "es2017"],
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "moduleResolution": "node"
+  },
+  "include": ["./src/**/*"],
+  "exclude": ["node_modules"]
+}

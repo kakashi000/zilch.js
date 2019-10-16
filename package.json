@@ -1,0 +1,21 @@
+{
+  "name": "zilch.js",
+  "version": "0.1.0",
+  "description": "An implementation of the dice game Zilch.",
+  "main": "src/index.js",
+  "author": "kakashi",
+  "license": "MIT",
+  "repository": "https://github.com/kakashi000/zilch.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^24.9.0",
+    "prettier": "1.18.2",
+    "ts-jest": "^24.1.0",
+    "typescript": "^3.6.4"
+  },
+  "dependencies": {
+    "@types/jest": "^24.0.18"
+  }
+}
