@@ -16,6 +16,11 @@ test("scoring", () => {
     100
   ])
 
+  expect(getScore([2, 4, 3, 2, 3, 2], [2, 2, 2])).toStrictEqual([
+    [3, 3, 4],
+    200
+  ])
+
   expect(getScore([1, 1, 1], [1])).toStrictEqual([[1, 1], 100])
 
   expect(getScore([2, 2, 2, 2, 2], [2, 2, 2, 2])).toStrictEqual([[2], 4000])
