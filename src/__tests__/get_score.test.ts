@@ -25,11 +25,7 @@ test("scoring", () => {
 
   expect(getScore([2, 2, 2, 2, 2], [2, 2, 2, 2])).toStrictEqual([[2], 4000])
 
-  expect(() => getScore([1, 2, 3, 4, 5, 6], [1, 1, 1])).toThrow(
-    "must be a subset"
-  )
+  expect(() => getScore([1, 2, 3, 4, 5, 6], [1, 1, 1])).toThrow("subset")
 
-  expect(() => getScore([1, 2, 3, 4, 5, 6], [1, 2, 3])).toThrow(
-    "no score found"
-  )
+  expect(() => getScore([1, 2, 3, 4, 5, 6], [1, 2, 3])).toThrow("no score")
 })
