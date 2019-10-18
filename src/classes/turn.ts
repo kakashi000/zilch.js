@@ -17,7 +17,7 @@ export class Turn {
     this.score = 0
   }
 
-  playDice(diceToPlay: number[] = []) {
+  playDice(diceToPlay: number[] = []): void {
     if (diceToPlay.length === 0) {
       this.dice = []
       this.score = 0

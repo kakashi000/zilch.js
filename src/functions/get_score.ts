@@ -14,10 +14,9 @@ export function getScore(
     throw new Error(`no score found for dice [${scoreString}].`)
   }
 
-  const regex = RegExp(scoreString)
-  if (!regex.test(sortedDice.join(","))) {
+  try {
+    return [without(sortedDice, sortedDiceToRemove), score]
+  } catch (err) {
     throw new Error("diceToRemove must be a subset of dice.")
   }
-
-  return [without(sortedDice, sortedDiceToRemove), score]
 }
