@@ -8,10 +8,10 @@ export function getScore(
   const sortedDice = [...dice].sort((a, b) => a - b)
   const sortedDiceToRemove = [...diceToRemove].sort((a, b) => a - b)
 
-  const scoreString = sortedDiceToRemove.join(",")
-  const score = scoreMap[scoreString]
+  const scoreKey = sortedDiceToRemove.join(",")
+  const score = scoreMap[scoreKey]
   if (typeof score !== "number") {
-    throw new Error(`no score found for dice [${scoreString}].`)
+    throw new Error(`no score found for dice [${scoreKey}].`)
   }
 
   try {

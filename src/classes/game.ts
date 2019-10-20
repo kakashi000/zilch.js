@@ -12,8 +12,7 @@ export class Game {
   winningScore: number
 
   constructor(playerCount: number, winningScore: number = 15000) {
-    this.players = Array(playerCount)
-      .fill(0)
+    this.players = [...Array(playerCount)]
       .map((_, i) => new Player(`Player ${i + 1}`))
     this.winningScore = winningScore
     this.nextPlayer = 0
@@ -26,7 +25,7 @@ export class Game {
   nextTurn(): number[] {
     const turn = new Turn(this.players[this.nextPlayer])
     this.currentTurn = turn
-    this.nextPlayer + 1 >= this.players.length ? this.nextPlayer = 0 : this.nextPlayer += 1
+    this.nextPlayer + 1 >= this.playerCount ? this.nextPlayer = 0 : this.nextPlayer += 1
     return turn.dice
   }
 

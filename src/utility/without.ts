@@ -5,12 +5,10 @@ export function without(array: any[], values: any[]): any[] {
     const indexOfRemoval = copy.findIndex(value => {
       return value === curr
     })
-
     if (indexOfRemoval > -1) {
       copy.splice(indexOfRemoval, 1)
       return acc
     }
-
     return [...acc, curr]
   }, [])
 
