@@ -1,44 +1,51 @@
-import { Turn, Status } from "../classes/turn"
+import { Game } from "./../classes/game"
+import { Turn } from "../classes/turn"
+import { Player } from "../classes/player"
+
+const game = new Game(3)
+const testPlayer = new Player("test")
 
 test("zilches turn", () => {
-  const turn = new Turn([3, 3, 3, 1, 2, 3])
-  turn.playDice([3, 3, 3])
+  const turn = new Turn(testPlayer, [3, 3, 3, 1, 2, 3])
+  game.currentTurn = turn
 
-  expect(turn.dice).toStrictEqual([1, 2, 3])
-  expect(turn.score).toBe(300)
-  expect(turn.status).toBe(Status.Continue)
+  const continueResult = game.playDice([3, 3, 3], false, true)
 
-  turn.playDice()
+  expect(continueResult.dice).toStrictEqual([1, 2, 3])
+  expect(continueResult.score).toBe(300)
+  expect(continueResult.player).toBe(turn.player)
 
-  expect(turn.dice).toStrictEqual([])
-  expect(turn.score).toBe(0)
-  expect(turn.status).toBe(Status.Zilch)
+  const zilchResult = game.playDice()
+
+  expect(zilchResult.dice).toStrictEqual([])
+  expect(zilchResult.score).toBe(0)
+  expect(zilchResult.player).toBe(turn.player)
 })
 
 test("finishes turn", () => {
-  const turn = new Turn([3, 3, 1, 1, 3, 3])
-  turn.playDice([1])
+  game.currentTurn = new Turn(testPlayer, [3, 3, 1, 1, 3, 3])
 
-  expect(turn.dice).toStrictEqual([1, 3, 3, 3, 3])
-  expect(turn.score).toBe(100)
-  expect(turn.status).toBe(Status.Continue)
+  let currentResult
 
-  turn.playDice([3, 3, 3, 3])
+  currentResult = game.playDice([1], false, true)
 
-  expect(turn.dice).toStrictEqual([1])
-  expect(turn.score).toBe(4100)
-  expect(turn.status).toBe(Status.Continue)
+  expect(currentResult.dice).toStrictEqual([1, 3, 3, 3, 3])
+  expect(currentResult.score).toBe(100)
 
-  turn.playDice([1])
+  currentResult = game.playDice([3, 3, 3, 3], false, true)
 
-  expect(turn.dice).toStrictEqual([])
-  expect(turn.score).toBe(4200)
-  expect(turn.status).toBe(Status.Finish)
+  expect(currentResult.dice).toStrictEqual([1])
+  expect(currentResult.score).toBe(4000)
+
+  currentResult = game.playDice([1], false, true)
+
+  expect(currentResult.dice).toStrictEqual([])
+  expect(currentResult.score).toBe(100)
 })
 
 test("throws errors", () => {
-  const turn = new Turn([1, 2, 3, 4, 5, 6])
+  game.currentTurn = new Turn(testPlayer, [1, 2, 3, 4, 5, 6])
 
-  expect(() => turn.playDice([1, 2, 3])).toThrow("no score")
-  expect(() => turn.playDice([1, 1, 1])).toThrow("subset")
+  expect(() => game.playDice([1, 2, 3])).toThrow("no score")
+  expect(() => game.playDice([1, 1, 1])).toThrow("subset")
 })
